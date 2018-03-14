@@ -6,10 +6,10 @@ class RigidBody :SceneObject
 {
 	float Width = 640, Height = 480;
 public:
+	int n = 4;
 	float len[3];
 	float mass[3];	
-	void render();		
-	int n = 4;
+	void render();			
 	Point* nodes = nullptr;
 	float** edge = nullptr;	
 	RigidBody() {}
