@@ -259,3 +259,5 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+glut-3.7.6-bin/glut.def
+glut-3.7.6-bin/README-win32.txt
