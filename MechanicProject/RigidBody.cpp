@@ -4,12 +4,12 @@
 #include<math.h>
 void RigidBody::render()
 {	
-
+	float x, y;
 	//Очистка цветового буфера
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	//Установка цвета отображения
-	glColor3d(1.0, 1.0, 0.0);
+	glColor3d(0.0, 0.0, 0.0);
 
 	//Рисование осей
 	glBegin(GL_LINES);
@@ -20,12 +20,22 @@ void RigidBody::render()
 	glVertex2d(.0, 40.);
 	//Завершить рисование осей
 	glEnd();
-	glColor3d(255, 0, 0);
+	glColor3d(0, 0, 0);
 	glBegin(GL_LINE_STRIP);
 	for (int i = 0; i < n; i++)
 	{
-		glVertex2d(nodes[i].x, nodes[i].y);
-	}
+		x = nodes[i].x;
+		y = nodes[i].y;
+		for (int j = 0; j < n; j++)
+		{
+			if (edge[i][j]!=0)
+			{
+				glVertex2d(x, y);
+				glVertex2d(nodes[j].x, nodes[j].y);
+				glTranslated(x, y, 0);				
+			}
+		}
+	}	
 	glEnd();	
 	glFlush();	
 }

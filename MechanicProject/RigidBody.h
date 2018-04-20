@@ -7,14 +7,7 @@ class RigidBody :SceneObject
 {
 public:
 	void render();	
-	void update();
-	/*void print()
-	{
-		for (int i = 0; i < n; i++)
-		{
-			printf("%f %f\n", nodes[i].x, nodes[i].y);
-		}
-	}	*/
+	void update();		
 	int n = 1;
 	Point* nodes = nullptr;
 	float** edge = nullptr;	

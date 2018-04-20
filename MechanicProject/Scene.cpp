@@ -5,4 +5,8 @@ void Scene::render()
 {
 
 }
+void Scene::update()
+{
+
+}
 

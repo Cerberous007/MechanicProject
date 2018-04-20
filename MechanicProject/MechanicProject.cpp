@@ -11,6 +11,7 @@
 
 float Width = 640, Height = 480;
 RigidBody* L_RB;
+Scene* L_S;
 
 void Reshape(int width, int height)
 {
@@ -30,29 +31,43 @@ void Reshape(int width, int height)
 void Draw(void)
 {
 	L_RB->render();
+
 }
 
 int main(int argc, char ** argv)
 {
-	int n = 5;
+	int n = 3;
 	Point *points = new Point[n];
 	float **edges = new float*[n];
 	for (int i = 0; i < n; i++)
 	{
 		edges[i] = new float[n];
 	}
+	puts("EDGES");
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < n; j++)
 		{
-			edges[i][j] = n;
-		}
+			if (i < j)
+				std::cin >> edges[i][j];
+			else
+				edges[i][j]=0;
+		}		
 	}
+	puts("Coords");
 	for (int i = 0; i < n; i++)
 	{
 		std::cin >> points[i].x;
 		std::cin >> points[i].y;
 	}	
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			printf("%lf ", edges[i][j]);
+		}
+		printf("\n");
+	}
 	std::auto_ptr<RigidBody> RB(new RigidBody(points, edges, n));
 	L_RB = RB.get();	
 	//Инициализация GLUT
@@ -70,7 +85,7 @@ int main(int argc, char ** argv)
 	//Определить функцию перерисовки
 	glutDisplayFunc(Draw);	
 	//Определить цвет очистки
-	glClearColor(0, 0, 0, 1);
+	glClearColor(255, 255, 255, 1);
 	//Вход в главный цикл GLUT
 	glutMainLoop();
 	return 0;
