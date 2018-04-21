@@ -2,27 +2,25 @@
 //
 
 #include "stdafx.h"
-#include<iostream>
+#include"ModelSimulator.h"
 #include"RigidBody.h"
 #include"Point.h"
 #include"Scene.h"
+#include<iostream>
 #include <glut.h>
 #include <memory>
 
 float Width = 640, Height = 480;
-RigidBody* L_RB;
-Scene* L_S;
+ModelSimulator* ptr_MS;
 
 void Reshape(int width, int height)
-{
-	//Установка порта вывода
-	//glViewport(0, 0, width, height);
+{	
 	//Режим матрицы проекций
 	glMatrixMode(GL_PROJECTION);
 	//Единичная матрица
 	glLoadIdentity();
 	//Установка двумерной ортографической системы координат 
-	gluOrtho2D(-50., 50., -50., 50.);
+	gluOrtho2D(-60., 60., -60., 60.);
 	//Режим видовой матрицы
 	glMatrixMode(GL_MODELVIEW);
 }
@@ -30,8 +28,7 @@ void Reshape(int width, int height)
 //Функция визуализации
 void Draw(void)
 {
-	L_RB->render();
-
+	ptr_MS->run();
 }
 
 int main(int argc, char ** argv)
@@ -68,8 +65,10 @@ int main(int argc, char ** argv)
 		}
 		printf("\n");
 	}
-	std::auto_ptr<RigidBody> RB(new RigidBody(points, edges, n));
-	L_RB = RB.get();	
+	Scene SC(5);
+	RigidBody RB(points, edges, n);	
+	std::auto_ptr<ModelSimulator> MS(new ModelSimulator(RB, SC));	
+	ptr_MS = MS.get();
 	//Инициализация GLUT
 	glutInit(&argc, argv);
 	//Задание размеров окна
@@ -85,7 +84,7 @@ int main(int argc, char ** argv)
 	//Определить функцию перерисовки
 	glutDisplayFunc(Draw);	
 	//Определить цвет очистки
-	glClearColor(255, 255, 255, 1);
+	glClearColor(0, 0, 0, 1);
 	//Вход в главный цикл GLUT
 	glutMainLoop();
 	return 0;

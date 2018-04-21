@@ -2,25 +2,31 @@
 #include"RigidBody.h"
 #include <glut.h>
 #include<math.h>
+
+
+RigidBody::RigidBody(const RigidBody &rb):SceneObject()
+{
+	edge = new float*[rb.n];
+	nodes = new Point[rb.n];
+	n = rb.n;
+	for (int i = 0; i < rb.n; i++)
+	{
+		edge[i] = new float[rb.n];
+		nodes[i] = rb.nodes[i];
+		for (int j = 0; j < rb.n; j++)
+		{
+			edge[i][j] = rb.edge[i][j];
+		}
+	}
+}
+
+
 void RigidBody::render()
 {	
 	float x, y;
 	//Очистка цветового буфера
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	//Установка цвета отображения
-	glColor3d(0.0, 0.0, 0.0);
-
-	//Рисование осей
-	glBegin(GL_LINES);
-	//Установка вершин
-	glVertex2d(-40., .0);
-	glVertex2d(40., .0);
-	glVertex2d(.0, -40.);
-	glVertex2d(.0, 40.);
-	//Завершить рисование осей
-	glEnd();
-	glColor3d(0, 0, 0);
+	//glClear(GL_COLOR_BUFFER_BIT);
+	glColor3d(0, 255, 0);
 	glBegin(GL_LINE_STRIP);
 	for (int i = 0; i < n; i++)
 	{
@@ -39,6 +45,7 @@ void RigidBody::render()
 	glEnd();	
 	glFlush();	
 }
+
 void RigidBody::update()
 {
 

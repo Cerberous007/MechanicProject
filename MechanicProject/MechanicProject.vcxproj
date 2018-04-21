@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ModelSimulator.h" />
+    <ClInclude Include="Physical.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="RigidBody.h" />
     <ClInclude Include="Scene.h" />
@@ -160,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="MechanicProject.cpp" />
     <ClCompile Include="ModelSimulator.cpp" />
+    <ClCompile Include="Physical.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="RigidBody.cpp" />
     <ClCompile Include="Scene.cpp" />
