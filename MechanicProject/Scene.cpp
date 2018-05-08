@@ -12,10 +12,8 @@ Scene::Scene(const Scene &scene)
 }
 void Scene::render()
 {	
-	//Очистка цветового буфера
-	//glClear(GL_COLOR_BUFFER_BIT);	
 	//Установка цвета отображения
-	glColor3d(255, 0, 0.0);
+	glColor3d(255, 255, 255);
 	//Рисование осей
 	glBegin(GL_LINES);
 	//Установка вершин
@@ -25,16 +23,11 @@ void Scene::render()
 	glVertex2d(.0, 60.);
 	//Завершить рисование осей
 	glEnd();	
-	glColor3d(255, 0, 0);
-	glBegin(GL_LINES);
-	glLineWidth(5);
+	glColor3d(255, 0, 0);	
+	glBegin(GL_LINES);	
 	glVertex2d(-50, lvl);
 	glVertex2d(50, lvl);
-	glEnd();
-	glFlush();
+	glEnd();	
 }
-void Scene::update()
-{
 
-}
 

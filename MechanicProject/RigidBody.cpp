@@ -4,6 +4,11 @@
 #include<math.h>
 
 
+float RigidBody::length(Point a, Point b)
+{
+	return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
+}
+
 RigidBody::RigidBody(const RigidBody &rb):SceneObject()
 {
 	edge = new float*[rb.n];
@@ -20,12 +25,26 @@ RigidBody::RigidBody(const RigidBody &rb):SceneObject()
 	}
 }
 
+void RigidBody::len_mass(float *mass, float *len, float **edge, int n)
+{
+	int k = 0;
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (edge[i][j] != 0)
+			{
+				len[k] = length(nodes[i],nodes[j]);
+				mass[k] = edge[i][j];
+				k++;
+			}
+		}
+	}
+}
 
 void RigidBody::render()
 {	
-	float x, y;
-	//Очистка цветового буфера
-	//glClear(GL_COLOR_BUFFER_BIT);
+	float x, y;	
 	glColor3d(0, 255, 0);
 	glBegin(GL_LINE_STRIP);
 	for (int i = 0; i < n; i++)
@@ -42,11 +61,5 @@ void RigidBody::render()
 			}
 		}
 	}	
-	glEnd();	
-	glFlush();	
-}
-
-void RigidBody::update()
-{
-
+	glEnd();		
 }

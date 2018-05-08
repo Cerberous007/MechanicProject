@@ -2,7 +2,11 @@
 #include"Point.h"
 #include"math.h"
 Point::Point(float _x, float _y) : x(_x), y(_y), x_v(0), y_v(0), x_w(0), y_w(0) {}
-Point::Point(float _x, float _y, float _x_v, float _y_v, float _x_w, float _y_w) : x(_x), y(_y), x_v(_x_v), y_v(_y_v), x_w(_x_w), y_w(_y_w) {}
+Point::Point(float _x, float _y, float _x_v,
+	float _y_v, float _x_w, float _y_w)
+{
+	x = _x, y = _y, x_v = _x_v, y_v = _y_v, x_w = _x_w, y_w = _y_w;
+}
 Point::Point(const Point &point)
 {
 	float x = point.x;

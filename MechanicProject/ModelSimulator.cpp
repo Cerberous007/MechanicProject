@@ -2,32 +2,25 @@
 #include"ModelSimulator.h"
 #include"RigidBody.h"
 #include <iostream>
-#include <Windows.h>
 #include<glut.h>
-//#include <ctime>
-//void sleep(const size_t seconds)
-//{
-//	clock_t start = clock();
-//	while ((double)(clock() - start) / CLOCKS_PER_SEC < seconds);
-//}
 ModelSimulator::ModelSimulator(RigidBody &_rb, Scene &_scene)
 {
 	rb =RigidBody (_rb);
 	sc = Scene(_scene);
 }
 void ModelSimulator::render()
-{
+{	
 	glClear(GL_COLOR_BUFFER_BIT);
 	sc.render();
 	rb.render();
+	glutSwapBuffers();
 }
-void ModelSimulator::run()
+
+void ModelSimulator::update()
 {
-	render();
-	Sleep(delta_t);
-	/*for (;;)
+	for (int i=0;i<rb.n;i++)
 	{
-		render();
-		Sleep(delta_t);
-	}*/
+		if(rb.nodes[0].y!=sc.lvl)
+			rb.nodes[i].y--;
+	}
 }

@@ -6,13 +6,11 @@
 class ModelSimulator
 {
 private:
-	void render();
-public:
-	//std::list<SceneObject> objects;	
-	//ModelSimulator() {}
+		
+public:	
 	RigidBody rb;
 	Scene sc;
 	ModelSimulator(RigidBody &_rb, Scene &_scene);	
-	double delta_t = 5000;
-	void run();
+	void render();
+	void update();
 };
