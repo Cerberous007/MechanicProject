@@ -9,7 +9,10 @@ static class Physical
 public:	
 	double g = 9.8;
 	double delta_time = 0.001;
-	double resist = 0.001;
+	double resist = 0.01;
+	double resist1 = 3;
+	/*double resist2 = 0.1;
+	double resist3 = 0.1;*/
 	const int n = 4;
 	double **invA=nullptr;
 	double *b = nullptr;

@@ -11,7 +11,7 @@
 #include <glut.h>
 #include <memory>
 
-double time = 50;
+double time = 1;
 double Width = 640, Height = 480;
 ModelSimulator* ptr_MS;
 
@@ -68,8 +68,8 @@ void Initialize_data(Point* points, double** edges, int n)
 	std::cin >> points[i].x;
 	std::cin >> points[i].y;
 	}*/
-	points[0].x = 5, points[0].y = 5, points[1].x = 3, points[1].y = 15;
-	points[2].x = 6, points[2].y = 25, points[3].x = 15, points[3].y = 25;
+	points[0].x = 5, points[0].y = 5, points[1].x = 4, points[1].y = 15;
+	points[2].x = -6, points[2].y = 25, points[3].x = 15, points[3].y = 24.5;
 }
 
 void Delete_data(Point* points, double **edges, int n)

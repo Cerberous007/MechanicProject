@@ -2,10 +2,7 @@
 class Point
 {
 public:
-	double x_v = 0;
-	double y_v = 0;
-	double x_w = 0;
-	double y_w = 0;
+
 	double x = 0;
 	double y = 0;
 	Point() {};
