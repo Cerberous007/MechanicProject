@@ -122,37 +122,19 @@ void Physical::update(RigidBody *rb)
 	b[0] = - (rb->mass[1] * g * (rb->nodes[0].x - rb->nodes[1].x) + rb->mass[2] * g*(rb->nodes[0].x - rb->nodes[1].x) + rb->mass[0] * g*(rb->nodes[0].x - rb->nodes[1].x) / 2) + resist1 * V[0] * rb->lentgh[0];
 	b[1] = -(rb->mass[2] * g * (rb->nodes[3].x - rb->nodes[1].x) / 2) - resist  *  V[1]* rb->lentgh[2];
 	b[2] = -(rb->mass[1] * g * (rb->nodes[2].x - rb->nodes[1].x) / 2) - resist  * V[2]* rb->lentgh[1];
-	b[3] = 0;//-resist*V[3];
+	b[3] = -resist*V[3];
 	mult();
 	for (int i = 0; i < n; i++)
 	{
-		/*if (i != 0)
-			V[i] += delta[i] - 0.000001;
-		else*/
+
 			V[i] += delta[i];
 	}
+
 	Point x(V[3], 0);
 
-
-	/*rb->nodes[3] = Point::rotate(rb->nodes[3], rb->nodes[1], delta_time*V[1]);
-	rb->nodes[2] = Point::rotate(rb->nodes[2], rb->nodes[1], delta_time*V[2]);
-	rb->nodes[2] += x*delta_time + Point::rotate(rb->nodes[1], rb->nodes[0], delta_time*V[0]) - rb->nodes[1];
-	rb->nodes[3] += x*delta_time + Point::rotate(rb->nodes[1], rb->nodes[0], delta_time*V[0]) - rb->nodes[1];
-	rb->nodes[1] += x*delta_time + Point::rotate(rb->nodes[1], rb->nodes[0], delta_time*V[0]) - rb->nodes[1];
-	rb->nodes[0] += x*delta_time;*/
 	rb->nodes[3] += x*delta_time + Point::rotate(rb->nodes[1], rb->nodes[0], delta_time*V[0]) - rb->nodes[1] + Point::rotate(rb->nodes[3], rb->nodes[1], delta_time*V[1]) - rb->nodes[3];
-
 	rb->nodes[2] += x*delta_time + Point::rotate(rb->nodes[1], rb->nodes[0], delta_time*V[0]) - rb->nodes[1] + Point::rotate(rb->nodes[2], rb->nodes[1], delta_time*V[2]) - rb->nodes[2];
 	rb->nodes[1] += x*delta_time + Point::rotate(rb->nodes[1], rb->nodes[0], delta_time*V[0]) - rb->nodes[1];
-
-
-
-
 	rb->nodes[0] += x*delta_time;
-	
-	
-	//printf("%f\n", (x*delta_time).x);
-
-	//printf("%f\n", (x*delta_time + Point::rotate(rb->nodes[1], rb->nodes[0], delta_time*V[0]) - rb->nodes[1]).x);
 
 }

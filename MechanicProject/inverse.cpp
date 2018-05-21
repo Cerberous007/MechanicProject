@@ -27,15 +27,7 @@ void gauseforward(double**b, double **a, int n, int k)
 		{
 			b[i][j] = b[i][j] - cur * b[k][j];
 			a[i][j] = a[i][j] - cur * a[k][j];
-
 		}
-		/*printf("a матрица\n");
-		for (int i = 0; i < n; i++)
-		{
-			for (int j = 0; j < n; j++)
-				printf("%f ", a[i][j]);
-			printf("\n");
-		}*/
 	}
 
 }

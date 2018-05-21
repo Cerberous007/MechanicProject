@@ -1,6 +1,5 @@
 #include"stdafx.h"
 #include"ModelSimulator.h"
-//#include"RigidBody.h"
 #include <iostream>
 #include<glut.h>
 ModelSimulator::ModelSimulator(RigidBody &_rb, Scene &_scene)

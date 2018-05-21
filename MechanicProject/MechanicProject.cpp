@@ -11,7 +11,7 @@
 #include <glut.h>
 #include <memory>
 
-double time = 1;
+double time = 1000/50;
 double Width = 640, Height = 480;
 ModelSimulator* ptr_MS;
 
@@ -61,7 +61,7 @@ void Initialize_data(Point* points, double** edges, int n)
 			edges[i][j] = 0;
 		}
 	}
-	edges[0][1] = 1, edges[1][2] = 1, edges[1][3] = 1;
+	edges[0][1] = 1, edges[1][2] = 0.1, edges[1][3] = 0.1;
 	puts("Coords");
 	/*for (int i = 0; i < n; i++)
 	{
