@@ -4,17 +4,16 @@
 
 class RigidBody :SceneObject
 {
-	float Width = 640, Height = 480;
+	double Width = 640, Height = 480;
 public:
 	int n = 4;
-	float len[3];
-	float mass[3];	
+	double lentgh[3];
+	double mass[3];
 	void render();			
 	Point* nodes = nullptr;
-	float** edge = nullptr;	
+	double** edge = nullptr;
 	RigidBody() {}
 	RigidBody(const RigidBody &rb);
-	RigidBody(Point *_nodes, float **_edge, int _n) :nodes(_nodes), edge(_edge), n(_n) {}
-	float length(Point a, Point b);
-	void len_mass(float *mass, float *len, float **edge, int n);
+	RigidBody(Point *_nodes, double **_edge, int _n);
+	double lengt(Point a, Point b);
 };

@@ -6,16 +6,18 @@
 #include"RigidBody.h"
 #include"Point.h"
 #include"Scene.h"
+#include "Physical.h"
 #include<iostream>
 #include <glut.h>
 #include <memory>
 
-float Width = 640, Height = 480;
+double time = 50;
+double Width = 640, Height = 480;
 ModelSimulator* ptr_MS;
 
 void Initialize()
 {
-	glClearColor(0, 0, 0, 1.0);
+	glClearColor(255, 255, 255, 1.0);
 	glLineWidth(2);
 	//Режим матрицы проекций
 	glMatrixMode(GL_PROJECTION);
@@ -38,14 +40,14 @@ void Timer(int)
 	//Draw();
 	ptr_MS->update();
 	glutPostRedisplay();
-	glutTimerFunc(50, Timer, 0);
+	glutTimerFunc(time, Timer, 0);
 }
 
-void Initialize_data(Point* points, float** edges, int n)
+void Initialize_data(Point* points, double** edges, int n)
 {
 	for (int i = 0; i < n; i++)
 	{
-		edges[i] = new float[n];
+		edges[i] = new double[n];
 	}
 	puts("EDGES");
 	for (int i = 0; i < n; i++)
@@ -66,18 +68,29 @@ void Initialize_data(Point* points, float** edges, int n)
 	std::cin >> points[i].x;
 	std::cin >> points[i].y;
 	}*/
-	points[0].x = 5, points[0].y = 5, points[1].x = 5, points[1].y = 15;
-	points[2].x = -5, points[2].y = 25, points[3].x = 15, points[3].y = 25;
+	points[0].x = 5, points[0].y = 5, points[1].x = 3, points[1].y = 15;
+	points[2].x = 6, points[2].y = 25, points[3].x = 15, points[3].y = 25;
+}
+
+void Delete_data(Point* points, double **edges, int n)
+{
+	delete[] points;
+	for (int i = 0; i < n; i++)
+	{
+		delete[]edges[i];
+	}
+	delete[]edges;
 }
 
 int main(int argc, char ** argv)
-{
+{	
 	int n = 4;
 	Point *points = new Point[n];
-	float **edges = new float*[n];
+	double **edges = new double*[n];
 	Initialize_data(points, edges, n);
 	Scene SC(-5);
-	RigidBody RB(points, edges, n);
+	RigidBody RB(points, edges, n);	
+	Physical PH(RB);
 	std::auto_ptr<ModelSimulator> MS(new ModelSimulator(RB, SC));
 	ptr_MS = MS.get();
 	for (int i = 0; i < n; i++)
@@ -88,6 +101,7 @@ int main(int argc, char ** argv)
 		}
 		printf("\n");
 	}	
+	PH.print();
 	//Инициализация GLUT
 	glutInit(&argc, argv);
 	//Задание размеров окна
@@ -102,9 +116,10 @@ int main(int argc, char ** argv)
 	//glutReshapeFunc(Reshape);
 	//Определить функцию перерисовки
 	glutDisplayFunc(Draw);	
-	glutTimerFunc(50, Timer, 0);
+	glutTimerFunc(time, Timer, 0);
 	Initialize();
 	//Вход в главный цикл GLUT
 	glutMainLoop();
+	Delete_data(points, edges, n);
 	return 0;
 }

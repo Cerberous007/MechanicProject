@@ -4,37 +4,23 @@
 #include<math.h>
 
 
-float RigidBody::length(Point a, Point b)
+double RigidBody::lengt(Point a, Point b)
 {
-	return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
+	return sqrtf((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y));
 }
 
-RigidBody::RigidBody(const RigidBody &rb):SceneObject()
+RigidBody::RigidBody(Point *_nodes, double **_edge, int _n)
 {
-	edge = new float*[rb.n];
-	nodes = new Point[rb.n];
-	n = rb.n;
-	for (int i = 0; i < rb.n; i++)
-	{
-		edge[i] = new float[rb.n];
-		nodes[i] = rb.nodes[i];
-		for (int j = 0; j < rb.n; j++)
-		{
-			edge[i][j] = rb.edge[i][j];
-		}
-	}
-}
-
-void RigidBody::len_mass(float *mass, float *len, float **edge, int n)
-{
-	int k = 0;
-	for (int i = 0; i < n; i++)
+	nodes = _nodes;
+	edge = _edge;
+	n = _n;
+	for (int i = 0, k = 0; i < n; i++)
 	{
 		for (int j = 0; j < n; j++)
 		{
 			if (edge[i][j] != 0)
 			{
-				len[k] = length(nodes[i],nodes[j]);
+				lentgh[k] = lengt(nodes[i], nodes[j]);
 				mass[k] = edge[i][j];
 				k++;
 			}
@@ -42,12 +28,41 @@ void RigidBody::len_mass(float *mass, float *len, float **edge, int n)
 	}
 }
 
+RigidBody::RigidBody(const RigidBody &rb):SceneObject()
+{	
+	edge = new double*[rb.n];
+	nodes = new Point[rb.n];
+	n = rb.n;
+	for (int i = 0; i < rb.n; i++)
+	{
+		edge[i] = new double[rb.n];
+		nodes[i] = rb.nodes[i];
+		for (int j = 0; j < rb.n; j++)
+		{
+			edge[i][j] = rb.edge[i][j];
+		}
+	}
+	for (int i = 0, k=0; i < n; i++)
+	{
+		for (int j = 0; j < n; j++)
+		{
+			if (edge[i][j] != 0)
+			{
+				lentgh[k] = lengt(nodes[i], nodes[j]);
+				mass[k] = edge[i][j];
+				k++;
+			}
+		}
+	}
+}
+
+
 void RigidBody::render()
 {	
 	float x, y;	
 	glColor3d(0, 255, 0);
 	glBegin(GL_LINE_STRIP);
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i <n; i++)
 	{
 		x = nodes[i].x;
 		y = nodes[i].y;

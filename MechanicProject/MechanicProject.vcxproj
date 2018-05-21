@@ -149,6 +149,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="inverse.h" />
     <ClInclude Include="ModelSimulator.h" />
     <ClInclude Include="Physical.h" />
     <ClInclude Include="Point.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="inverse.cpp" />
     <ClCompile Include="MechanicProject.cpp" />
     <ClCompile Include="ModelSimulator.cpp" />
     <ClCompile Include="Physical.cpp" />

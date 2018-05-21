@@ -1,28 +1,30 @@
 #pragma once
 #include "RigidBody.h"
 #include "Scene.h"
+#include<random>
 
-static class Physical:RigidBody
+
+static class Physical
 {
 public:	
-	int n = 4;
-	float **A = NULL;	
-	float *q = NULL;
-	static void update(RigidBody rb, Scene sc);		
-	Physical(RigidBody rb)
-	{
-		float **A = new float*[n];
-		for (int i = 0; i < n; i++)
-		{
-			A[i] = new float[n];
-		}
-		for (int i = 0; i < n; i++)
-		{
-			for (int j = 0; j < n; j++)
-			{
+	double g = 9.8;
+	double delta_time = 0.001;
+	double resist = 0.001;
+	const int n = 4;
+	double **invA=nullptr;
+	double *b = nullptr;
+	double *delta = nullptr;
+	double *V = nullptr;
 
-			}
-		}
-	}
+	const double disp = 0.1;
+	std::normal_distribution<> distr;
+	std::mt19937 gen;
+	void update(RigidBody *rb);	
+	Physical() {}
+	Physical &operator=(const Physical &a);
+	Physical(RigidBody rb);
+	~Physical();	
+	void print();
+	void mult();
 };
 

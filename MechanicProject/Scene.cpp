@@ -13,7 +13,7 @@ Scene::Scene(const Scene &scene)
 void Scene::render()
 {	
 	//Установка цвета отображения
-	glColor3d(255, 255, 255);
+	glColor3d(0, 0, 0);
 	//Рисование осей
 	glBegin(GL_LINES);
 	//Установка вершин

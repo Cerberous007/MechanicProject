@@ -2,18 +2,20 @@
 class Point
 {
 public:
-	float x_v = 0;
-	float y_v = 0;
-	float x_w = 0;
-	float y_w = 0;
-	float x = 0;
-	float y = 0;
+	double x_v = 0;
+	double y_v = 0;
+	double x_w = 0;
+	double y_w = 0;
+	double x = 0;
+	double y = 0;
 	Point() {};
 	Point(const Point &point);
-	Point(float _x, float _y);
-	Point(float _x, float _y, float _x_v, float _y_v, float _x_w, float _y_w);
-	Point &operator+=(const Point &x);
-	Point &operator*=(const float x);
-	Point &operator-=(const Point &x);
-	void rotate(Point a, Point b, float phi);
+	Point(double _x, double _y);
+	Point(double _x, double _y, double _x_v, double _y_v, double _x_w, double _y_w);
+	Point &operator+=(const Point &a);
+	Point &operator*(const double a);
+	Point &operator-=(const Point &a);
+	Point &operator+(const Point &a);
+	Point &operator-(const Point &a);
+	static Point rotate(Point a, Point b, double phi);
 };
