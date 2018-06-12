@@ -11,7 +11,7 @@
 #include <glut.h>
 #include <memory>
 
-double time = 1000/50;
+double time = 10;
 double Width = 640, Height = 480;
 ModelSimulator* ptr_MS;
 
@@ -35,14 +35,15 @@ void Draw(void)
 	ptr_MS->render();
 }
 
+//Функция анимации
 void Timer(int)
-{
-	//Draw();
+{	
 	ptr_MS->update();
 	glutPostRedisplay();
 	glutTimerFunc(time, Timer, 0);
 }
 
+//Функция иницивализации начальных данных
 void Initialize_data(Point* points, double** edges, int n)
 {
 	for (int i = 0; i < n; i++)
@@ -68,10 +69,11 @@ void Initialize_data(Point* points, double** edges, int n)
 	std::cin >> points[i].x;
 	std::cin >> points[i].y;
 	}*/
-	points[0].x = 5, points[0].y = 5, points[1].x = 4, points[1].y = 15;
-	points[2].x = -6, points[2].y = 25, points[3].x = 15, points[3].y = 24.5;
+	points[0].x = 0, points[0].y = 5, points[1].x = 10, points[1].y = 15;
+	points[2].x = -5, points[2].y = 25, points[3].x = 15, points[3].y = 25;
 }
 
+//Очитска памяти
 void Delete_data(Point* points, double **edges, int n)
 {
 	delete[] points;
@@ -82,13 +84,14 @@ void Delete_data(Point* points, double **edges, int n)
 	delete[]edges;
 }
 
+//Здесь объявляются начальные данные и окно opengl
 int main(int argc, char ** argv)
 {	
 	int n = 4;
 	Point *points = new Point[n];
 	double **edges = new double*[n];
 	Initialize_data(points, edges, n);
-	Scene SC(-5);
+	Scene SC(4);
 	RigidBody RB(points, edges, n);	
 	Physical PH(RB);
 	std::auto_ptr<ModelSimulator> MS(new ModelSimulator(RB, SC));
@@ -102,23 +105,19 @@ int main(int argc, char ** argv)
 		printf("\n");
 	}	
 	PH.print();
-	//Инициализация GLUT
+
 	glutInit(&argc, argv);
-	//Задание размеров окна
+
 	glutInitWindowSize(Width, Height);
-	//Задание положения окна
 	glutInitWindowPosition(100, 100);
-	//Инициализация режимов
 	glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGB);
-	//Задание заголовка окна
+
 	glutCreateWindow("Whirlpool");
-	//Определить функцию изменения размеров
-	//glutReshapeFunc(Reshape);
-	//Определить функцию перерисовки
+	
 	glutDisplayFunc(Draw);	
 	glutTimerFunc(time, Timer, 0);
 	Initialize();
-	//Вход в главный цикл GLUT
+	
 	glutMainLoop();
 	Delete_data(points, edges, n);
 	return 0;

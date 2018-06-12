@@ -2,6 +2,7 @@
 #include"ModelSimulator.h"
 #include <iostream>
 #include<glut.h>
+
 ModelSimulator::ModelSimulator(RigidBody &_rb, Scene &_scene)
 {
 	ph = Physical(_rb);
@@ -18,7 +19,6 @@ void ModelSimulator::render()
 
 void ModelSimulator::update()
 {	
-	//bool flag = false;
 	if (rb.nodes[0].y > sc.lvl)
 	{
 		for (int i = 0; i < rb.n; i++)
