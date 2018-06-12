@@ -1,0 +1,38 @@
+\usepackage[utf8]{inputenc}
+\usepackage[T1, T2A]{fontenc}
+\usepackage[english, russian]{babel}
+\usepackage[top=2cm, bottom=2cm, left=1cm, right=1cm]{geometry}
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{tikz}
+\usepackage[pdftex]{graphicx}
+\usepackage{mathtools}
+\usepackage{enumerate}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage[unicode, colorlinks=true, linkcolor=blue, urlcolor=blue, pdftex]{hyperref}
+
+\parindent=1cm
+\parskip=0.2cm
+
+\chead{}
+\rhead{\thepage}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+
+\makeatletter
+\@addtoreset{subsection}{part}
+\makeatother
+
+\renewcommand*{\thesection}{\arabic{section}.}
+\renewcommand*{\thesubsection}{\arabic{section}.\arabic{subsection}.}
+
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}%
+{\hbox{$\mathsurround=0pt #1$}}{}}
+\newcommand*{\tbsh}{\textbackslash}
+
+\renewcommand\partheadstartvskip{\clearpage\null\vfil}
+\renewcommand\partheadmidvskip{\par\nobreak\vskip .5pt\thispagestyle{empty}}
+\renewcommand\partheadendvskip{\vfil\clearpage}
+\renewcommand\raggedpart{\centering}
+
